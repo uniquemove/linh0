@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('anhnen.jpg');
+            background-color: #9e0b0f;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-position-y: bottom;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .greeting {
+            text-align: center;
+            padding: 20px;
+            margin: 6px;
+            border-radius: 10px;
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: center;
+            background-position-y: 10px;
+            background-color: white;
+            box-shadow: 0 0 13px 1px #ff7373;
+            max-width: 90%;
+            color: #873737;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .buttons > div {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: transform 1s ease-in-out;
+            text-align: center;
+            border: 1px px solid white;
+            box-shadow: 0 0 19px 9px white;
+        }
+
+        #noBtn {
+            background-color: #120032;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        #personalInfo {
+            /* display: none; Remove this line */
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 13px 1px #ff7373;
+            color: #000;
+        }
+
+        #personalInfo.visible {
+            display: block;
+        }
+
+        /* CSS cho hình ảnh */
+        #image {
+            max-width: 90%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+    <title>QÙA LÌ XÌ CHO MỌI NGƯỜI</title>
+</head>
+<body>
+    <audio id="myAudio" controls autoplay style="display: none;">
+        <source src="xuandangtoi.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <div class="greeting" id="main">
+            <h1>Chào bạn đến năm mới rồi. Bạn có muốn nhận lì xì không?</h1>
+            <div class="buttons">
+                <div>
+                    <button id="yesBtn">NHẬN LÌ XÌ</button>
+                </div>
+                <div>
+                    <button id="noBtn">KHÔNG NHẬN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div id="personalInfo">
+            <h2>Thông tin cá nhân</h2>
+            <p>Tên: Lê Hồng Linh</p>
+            <p>MSV: 22810310058</p>
+            <p>Email: lhl2k4@gmail.com</p>
+            <p>Số điện thoại: 0828926889</p>
+        </div>
+
+        <div>
+            <img id="image" src="" alt="">
+        </div>
+        <button style="background-color: #9e0b0f; display: none;" type="button" onclick="show()" id="btnID">Chút yêu thương</button>
+    </div>
+
+    <script>
+        document.getElementById('yesBtn').addEventListener('mouseenter', function() {
+            moveButtonRandomly(this);
+        });
+
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            moveButtonRandomly(this);
+        });
+        document.getElementById('noBtn').addEventListener('click', function() {
+            document.getElementById('main').innerHTML = "<br><br><br>Như vậy là bạn cùng gia đinh đã ấm no đong đầy<br><br>Nhân dịp năm mới, Chúc bạn cùng gia đình nhiều sức khỏe, gặp may mắn trong cuộc sống, và thuận lợi trong công việc. <h2>CHÚC MỪNG NĂM MỚI</h2><h3>Chưa hết bạn hãy lướt xuống dưới!</h3>";
+            document.getElementById("btnID").style.display = "inline-block";
+        });
+        function moveButtonRandomly(button) {
+            // Define specific positions for the button to jump to
+            const positions = [
+                { x: 20, y: 20 },
+                { x: window.innerWidth - button.clientWidth - 20, y: 20 },
+                { x: window.innerWidth - button.clientWidth - 20, y: window.innerHeight - button.clientHeight - 20 },
+                { x: 20, y: window.innerHeight - button.clientHeight - 20 }
+            ];
+
+            // Choose a random position from the defined positions
+            const randomIndex = Math.floor(Math.random() * positions.length);
+            const newPosition = positions[randomIndex];
+
+            button.style.position = 'fixed';
+            button.style.left = newPosition.x + 'px';
+            button.style.top = newPosition.y + 'px';
+        }
+        function show() {
+            let image = document.getElementById("image");
+            image.src = "anhdep.jpg";
+            document.getElementById("btnID").style.display = "none";
+            // Tự động cuộn trang xuống ảnh cuối cùng
+            document.getElementById("image").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener('click', function() {
+            var audio = document.getElementById('myAudio');
+            if (audio.paused) {
+                audio.play();
+            }
+        });
+    </script>
+</body>
+</html>
